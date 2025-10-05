@@ -1,0 +1,20 @@
+name: Send Zulip message
+on:
+  push:
+
+jobs:
+  send-zulip-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a stream message
+        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        with:
+          api-key: ${{ secrets.ZULIP_API_KEY }}
+          email: "githubfailedrun-bot@access-nri.zulipchat.com"
+          organization-url: "https://access-nri.zulipchat.com"
+          type: "stream"
+          to: "model-release"
+          topic: "Zulip bots"
+          content: |
+            This is a test!
+            [Run link](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
